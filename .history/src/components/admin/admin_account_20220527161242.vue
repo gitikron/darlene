@@ -1,0 +1,75 @@
+<template>
+  <div>
+    <div class="alert alert-danger" role="alert" v-if="alert.control===true" @click="alert.control=false,alert.text=''">
+      {{alert.text}},คลิ๊กเพื่อปิดการแจ้งเตือน.
+    </div>
+    <div class="alert alert-success" role="alert" v-if="alert2.control===true" @click="alert2.control=false,alert2.text=''">
+      {{alert2.text}},คลิ๊กเพื่อปิดการแจ้งเตือน.
+    </div>
+    <div class="d-flex justify-content-end m-2">
+      <button class="btn btn-sm btn-success" @click="swift()">Create</button>
+    </div>
+
+    <div class="card m-2 p-2" v-if="switchs===true">
+      <input type="text" class="form-control mt-2" placeholder="Username" v-model="personal.username">
+      <input type="password" class="form-control mt-2" placeholder="Password" v-model="pass.password1">
+      <input type="password" class="form-control mt-2" placeholder="Confirm Password" v-model="pass.password2">
+      <select id="position" class="form-control mt-2" v-model="personal.position">
+         <option value="">เลือก</option>
+        <option value="admin">admin</option>
+      </select>
+      <input type="password" class="form-control mt-2" placeholder="Name" v-model="personal.name">
+    </div>
+  </div>
+</template>
+
+<script>
+import sha1 from 'sha1'
+import moment from 'moment'
+export default {
+  name: 'DarleneVue3AdminAccount',
+  data() {
+    return {
+      pass:{
+        password1:'',
+        password2:''
+      },
+      personal: {
+        username: "",
+        password: "",
+        name: "",
+        role: "admin",
+        position: "",
+        create: moment(Date.now()).format("DD/MM/YYYY"),
+      },
+      switchs:true,
+      alert:{
+        text:"",
+        control:false
+      },
+      alert2:{
+        text:"",
+        control:false
+      }
+    };
+  },
+
+  mounted() {
+    
+  },
+
+  methods: {
+    swift(){
+      if (this.switchs==true) {
+        this.switchs=false
+      }else{
+        this.switchs=true
+      }
+    }
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+
+</style>

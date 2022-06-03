@@ -1,0 +1,80 @@
+<template>
+  <div>
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-sm btn-success m-2" @click="swift()">create</button>
+    </div>
+    <div class="alert alert-danger" role="alert" v-if="alert.control===true" @click="alert.control=false,alert.text=''">
+    {{alert.text}},คลิ๊กเพื่อปิดการแจ้งเตือน.
+    </div>
+    <div class="alert alert-success" role="alert" v-if="alert2.control===true" @click="alert2.control=false,alert2.text=''">
+    {{alert2.text}},คลิ๊กเพื่อปิดการแจ้งเตือน.
+    </div>
+
+    <div>
+      <input type="text" class="form-control" placeholder="ชื่อรายการ">
+      
+    </div>
+  </div>
+</template>
+
+<script>
+import "jquery/dist/jquery.min.js";
+// import "bootstrap/dist/css/bootstrap.min.css";
+import "datatables.net-dt/js/dataTables.dataTables";
+import "datatables.net-dt/css/jquery.dataTables.min.css";
+import axios from "axios";
+import $ from "jquery";
+import command from '@/assets/command';
+const DB_URL = command.DB_URL
+export default {
+  name: 'DarleneVue3StockIndex',
+
+  data() {
+    return {
+      control:false,
+      alert:{
+        text:'',
+        control:false
+      },
+      alert2:{
+        text:'',
+        control:false
+      },
+      alert3:{
+        text:'',
+        control:false
+      },
+      alert4:{
+        text:'',
+        control:false
+      },
+      type:[],
+    };
+  },
+
+  mounted() {
+    
+  },
+
+  methods: {
+    swift(){
+      if (this.control==false) {
+        this.control=true
+      }else{
+        this.control=false
+      }
+    },
+    getType(){
+      axios.get(`${DB_URL}/stock/type.json`).then((result) => {
+        this.type=result.data
+      }).catch((err) => {
+        
+      });
+    },
+  }
+};
+</script>
+
+<style lang="scss" scoped>
+
+</style>
